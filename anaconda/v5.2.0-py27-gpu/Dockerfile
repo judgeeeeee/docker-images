@@ -15,6 +15,8 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     libasound2 \
     libxi6 \
     libxtst6 \
+    liblmdb-dev \
+    libopencv-dev python-opencv \
     curl wget vim git \
     # For horovod
     gcc-4.9 g++-4.9 gcc-4.9-base \
