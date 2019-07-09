@@ -6,6 +6,15 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     libjpeg-dev \
     libpng-dev \
     libgl1-mesa-glx \
+    libegl1-mesa \
+    libxrandr2 \
+    libxrandr2 \
+    libxss1 \
+    libxcursor1 \
+    libxcomposite1 \
+    libasound2 \
+    libxi6 \
+    libxtst6 \
     curl wget vim git \
     # For horovod
     gcc-4.9 g++-4.9 gcc-4.9-base \
@@ -17,11 +26,13 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Anaconda2-5.2.0 built-in with python2.7
-RUN curl -o ~/conda.sh -O  https://repo.continuum.io/archive/Anaconda2-5.2.0-Linux-x86_64.sh && \
-    chmod +x ~/conda.sh && \
-    ~/conda.sh -b -p /opt/conda && \
-    /opt/conda/bin/conda update -n base -c defaults conda && \
-    rm ~/conda.sh && \
+RUN curl -o ~/anaconda.sh -O  https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda2-5.2.0-Linux-x86_64.sh  && \
+    chmod +x ~/anaconda.sh && \
+    ~/anaconda.sh -b -p /opt/conda && \
+    rm ~/anaconda.sh && \
+    /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ && \
+    /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ && \
+    /opt/conda/bin/conda config --set show_channel_urls yes && \
     /opt/conda/bin/conda clean -ya
 
 # Set path
