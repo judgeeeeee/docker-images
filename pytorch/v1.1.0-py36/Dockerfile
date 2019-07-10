@@ -19,7 +19,10 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-RUN conda install pytorch-cpu==1.1.0 torchvision-cpu -c pytorch && \
+RUN conda install -y -c menpo opencv opencv3 && \
+    conda install -y -c caffe2 lmdb python-lmdb && \
+    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install pytorch-cpu==1.1.0 torchvision-cpu -c pytorch && \
     conda clean -ya
 
 # Install Horovod

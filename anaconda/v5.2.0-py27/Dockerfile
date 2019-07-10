@@ -17,6 +17,7 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     libxtst6 \
     liblmdb-dev \
     libopencv-dev python-opencv \
+    graphviz \
     curl wget vim git \
     # For horovod
     gcc-4.9 g++-4.9 gcc-4.9-base \
@@ -35,6 +36,8 @@ RUN curl -o ~/anaconda.sh -O  https://mirrors.tuna.tsinghua.edu.cn/anaconda/arch
     /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ && \
     /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ && \
     /opt/conda/bin/conda config --set show_channel_urls yes && \
+    /opt/conda/bin/conda install conda-build && \
+    /opt/conda/bin/conda update --all && \
     /opt/conda/bin/conda clean -ya
 
 # Set path

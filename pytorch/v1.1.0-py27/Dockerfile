@@ -28,7 +28,10 @@ RUN git clone https://github.com/pytorch/pytorch.git && \
     export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"} && \
     python setup.py install
 
-RUN conda install torchvision-cpu -c pytorch && \
+RUN conda install -y -c menpo opencv opencv3 && \
+    conda install -y -c caffe2 lmdb python-lmdb && \
+    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install torchvision-cpu -c pytorch && \
     conda clean -ya
 
 # Install Horovod
