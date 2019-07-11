@@ -13,12 +13,13 @@ function valid () {
 
 
 #for package in anaconda caffe;do
-for package in jupyter mxnet pytorch scikit-learn tensorflow keras;do
-    echo "Start build -------> $package"
-    for version in  `ls $package`; do
-	docker build -t cargo-infra.caicloud.xyz/devops_release/$package:$version $package/$version/ 
-        valid $package:$version
-        docker tag cargo-infra.caicloud.xyz/devops_release/$package:$version codeflitting/$package:$version
-        docker push codeflitting/$package:$version
-    done
+for i in {1..20}
+do
+	for package in anaconda jupyter pytorch tensorflow keras;do
+	    echo "Start build -------> $package"
+	    for version in  `ls $package`; do
+		docker build -t cargo-infra.caicloud.xyz/devops_release/$package:$version $package/$version/ 
+		valid $package:$version
+	    done
+	done
 done

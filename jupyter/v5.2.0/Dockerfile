@@ -4,7 +4,7 @@ FROM cargo-infra.caicloud.xyz/devops_release/anaconda:v5.2.0-py36
 RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \
     source activate tf-py36 && \
     conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir tensorflow==1.12.0 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py36 --display-name TensorFlow-v1.12-py36 "
@@ -12,7 +12,7 @@ RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \
 RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
     source activate tf-py27 && \
     conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir tensorflow==1.12.0 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py27 --display-name TensorFlow-v1.12-py27 "
@@ -22,7 +22,7 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     source activate pytorch-py36 && \
     conda install -y -c menpo opencv opencv3 && \
     conda install -y -c caffe2 lmdb python-lmdb && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     conda install -y pytorch-cpu==1.1.0 torchvision-cpu -c pytorch && \
     conda clean -ya && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.1.0-py36 "
@@ -30,7 +30,7 @@ RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     source activate pytorch-py27 && \
     conda install -y -c menpo opencv opencv3 && \
     conda install -y -c caffe2 lmdb python-lmdb && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     conda install -y pytorch-cpu==1.1.0 torchvision-cpu -c pytorch && \
     conda clean -ya && \
     python -m ipykernel install --user --name pytorch-py27 --display-name PyTorch-v1.1.0-py27 "
@@ -39,14 +39,14 @@ RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
 RUN /bin/bash -c "conda create -n mxnet-py36 python=3.6 ipykernel && \
     source activate mxnet-py36 && \
     conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir mxnet==1.4.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name mxnet-py36 --display-name MXNet-v1.4.0-py36 "
 RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
     source activate mxnet-py27 && \
     conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir mxnet==1.4.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name mxnet-py27 --display-name MXNet-v1.4.0-py27 "
@@ -55,13 +55,13 @@ RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
 RUN /bin/bash -c "conda create -n caffe-py36 python=3.6 ipykernel && \
     source activate caffe-py36 && \
     conda install -y -c menpo opencv opencv3 && \
-    conda install -y caffe==1.0 numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y caffe==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     conda clean -ya && \
     python -m ipykernel install --user --name caffe-py36 --display-name Caffe-v1.0-py36 "
 RUN /bin/bash -c "conda create -n caffe-py27 python=2.7 ipykernel && \
     source activate caffe-py27 && \
     conda install -y -c menpo opencv opencv3 && \
-    conda install -y caffe==1.0 numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install -y caffe==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     conda clean -ya && \
     python -m ipykernel install --user --name caffe-py27 --display-name Caffe-v1.0-py27 "
 
@@ -72,7 +72,8 @@ RUN /bin/bash -c "source deactivate" && \
     echo "c.NotebookApp.token = ''" >> /root/.jupyter/jupyter_notebook_config.py && \
     echo "c.NotebookApp.allow_remote_access = True" >> /root/.jupyter/jupyter_notebook && \
     # install jupyterLab extension
-    conda install -y nodejs ipywidgets jupyterlab tornado jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
+    conda install -y nodejs ipywidgets jupyterlab tornado && \
+    conda install -y -c conda-forge jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
     npm config set registry https://registry.npm.taobao.org && \
     conda clean -ya
 

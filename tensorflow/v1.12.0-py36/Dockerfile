@@ -21,7 +21,10 @@ RUN mkdir -p /var/run/sshd && \
 # Install tensorflow & keras
 ARG TENSORFLOW_VERSION=1.12.0
 ARG TENSORFLOW_TYPE=tensorflow
-RUN pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
+RUN conda install -y -c menpo opencv opencv3 && \
+    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+    conda clean -ya && \
+    pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 # bug: conda-tensorflow has conflict with openmpi
 #RUN conda install keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION} && \
 #    conda clean -ya
