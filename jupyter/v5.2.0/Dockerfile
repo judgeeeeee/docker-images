@@ -72,8 +72,8 @@ RUN /bin/bash -c "source deactivate" && \
     echo "c.NotebookApp.token = ''" >> /root/.jupyter/jupyter_notebook_config.py && \
     echo "c.NotebookApp.allow_remote_access = True" >> /root/.jupyter/jupyter_notebook && \
     # install jupyterLab extension
-    conda install -y nodejs ipywidgets jupyterlab tornado && \
-    conda install -y -c conda-forge jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
+    conda install nodejs && \
+    conda install -y -c conda-forge ipywidgets jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
     npm config set registry https://registry.npm.taobao.org && \
     conda clean -ya
 
@@ -81,7 +81,6 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
     jupyter labextension install jupyterlab-drawio && \
     jupyter labextension install @jupyterlab/plotly-extension && \
     jupyter labextension install @jupyterlab/toc && \
-    jupyter labextension install @oriolmirosa/jupyterlab_materialdarker && \
     # Integrate tensorboard
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --ignore-installed --upgrade pip wrapt && \
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir tensorflow jupyter-tensorboard && jupyter labextension install jupyterlab_tensorboard
