@@ -19,19 +19,26 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-#
-RUN git clone https://github.com/pytorch/pytorch.git && \
+RUN conda install numpy ninja pyyaml mkl mkl-include setuptools cmake cffi typing scipy matplotlib pydot protobuf pandas nltk gensim && \
+    conda install -y -c caffe2 lmdb python-lmdb && \
+    conda install -y -c menpo opencv opencv3 && \ 
+    git clone https://github.com/pytorch/pytorch.git && \
     cd pytorch && git checkout v1.1.0    && \
     # if you are updating an existing checkout
     git submodule sync && \
     git submodule update --init --recursive && \
     export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"} && \
+    export USE_CUDA=0 && \
+    export USE_CUDNN=0 && \
+    export USE_LMDB=1 && \
+    export USE_LEVELDB=1 && \
+    export USE_OPENCV=1 && \
+    export BUILD_CAFFE2_OPS=1 && \
+    export USE_FFMPEG=1 && \
+    export USE_FBGEMM=1 && \
     python setup.py install
 
-RUN conda install -y -c menpo opencv opencv3 && \
-    conda install -y -c caffe2 lmdb python-lmdb && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
-    conda install torchvision-cpu -c pytorch && \
+RUN conda install torchvision-cpu -c pytorch && \
     conda clean -ya
 
 # Install Horovod

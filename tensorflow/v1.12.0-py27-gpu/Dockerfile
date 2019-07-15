@@ -21,8 +21,8 @@ RUN mkdir -p /var/run/sshd && \
 # Install tensorflow & keras
 ARG TENSORFLOW_VERSION=1.12.0
 ARG TENSORFLOW_TYPE=tensorflow-gpu
-RUN conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+RUN conda install -c menpo opencv opencv3 && \
+    conda install numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
     conda clean -ya && \
     pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 

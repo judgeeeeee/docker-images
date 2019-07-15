@@ -21,17 +21,14 @@ RUN mkdir -p /var/run/sshd && \
 # Install tensorflow & keras
 ARG TENSORFLOW_VERSION=1.12.0
 ARG TENSORFLOW_TYPE=tensorflow
-RUN conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
+RUN conda install -c menpo opencv opencv3 && \
+    conda install numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
     conda clean -ya && \
     pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
-# bug: conda-tensorflow has conflict with openmpi
-#RUN conda install keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION} && \
-#    conda clean -ya
 
 # Install Horovod
-## Pin GCC to 4.9 (priority 200) to compile correctly against TensorFlow, PyTorch, and MXNet.
-## Backup existing GCC installation as priority 100, so that it can be recovered later.
+# Pin GCC to 4.9 (priority 200) to compile correctly against TensorFlow, PyTorch, and MXNet.
+# Backup existing GCC installation as priority 100, so that it can be recovered later.
 RUN update-alternatives --install /usr/bin/gcc gcc $(readlink -f $(which gcc)) 100 && \
     update-alternatives --install /usr/bin/x86_64-linux-gnu-gcc x86_64-linux-gnu-gcc $(readlink -f $(which gcc)) 100 && \
     update-alternatives --install /usr/bin/g++ g++ $(readlink -f $(which g++)) 100 && \

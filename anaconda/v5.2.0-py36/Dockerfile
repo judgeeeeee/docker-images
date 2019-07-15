@@ -18,6 +18,7 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     liblmdb-dev \
     libopencv-dev python-opencv \
     graphviz \
+    libgomp1 \
     curl wget vim git \
     # For horovod
     gcc-4.9 g++-4.9 gcc-4.9-base \
@@ -29,13 +30,12 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Anaconda3-5.2.0 built-in with python3.6
-RUN curl -o ~/anaconda.sh -O  https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.2.0-Linux-x86_64.sh  && \
+RUN curl -o ~/anaconda.sh -O https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh && \
     chmod +x ~/anaconda.sh && \
     ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh && \
-    /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ && \
-    /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ && \
     /opt/conda/bin/conda config --set show_channel_urls yes && \
+    /opt/conda/bin/conda install python=3.6 conda-build && \
     /opt/conda/bin/conda clean -ya
 
 # Set path

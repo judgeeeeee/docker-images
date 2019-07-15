@@ -3,65 +3,105 @@ FROM cargo-infra.caicloud.xyz/devops_release/anaconda:v5.2.0-py36-gpu
 # Install tensorflow-1.12.0 and keras-2.2.2
 RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \
     source activate tf-py36 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir tensorflow-gpu==1.12.0 keras tflearn && \
+    conda install-c menpo opencv opencv3 && \
+    conda installnumpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    pip install --no-cache-dir tensorflow-gpu==1.12.0 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py36 --display-name TensorFlow-v1.12-py36 "
 
 RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
     source activate tf-py27 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir tensorflow-gpu==1.12.0 keras tflearn && \
+    conda install-c menpo opencv opencv3 && \
+    conda installnumpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    pip install --no-cache-dir tensorflow-gpu==1.12.0 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py27 --display-name TensorFlow-v1.12-py27 "
 
 # Install pytorch-1.1.0
 RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     source activate pytorch-py36 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y -c caffe2 lmdb python-lmdb && \
-    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
-    conda install -y pytorch==1.1.0 torchvision cudatoolkit=9.0 -c pytorch && \
+    conda install  cudatoolkit=9.0 leveldb numpy ninja pyyaml mkl mkl-include setuptools cmake cffi typing scipy matplotlib pydot protobuf pandas nltk gensim && \
+    conda install -c caffe2 lmdb python-lmdb && \
+    conda install -c menpo opencv opencv3 && \
+    git clone https://github.com/pytorch/pytorch.git && \
+    cd pytorch && git checkout v1.1.0    && \
+    # if you are updating an existing checkout
+    git submodule sync && \
+    git submodule update --init --recursive && \
+    export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"} && \
+    export USE_CUDA=1 && \
+    export USE_CUDNN=1 && \
+    export USE_LMDB=1 && \
+    export USE_LEVELDB=1 && \
+    export USE_OPENCV=1 && \
+    export BUILD_CAFFE2_OPS=1 && \
+    export USE_FFMPEG=1 && \
+    export USE_FBGEMM=1 && \
+    export FULL_CAFFE2=1 && \
+    export BUILD_BINARY=1 && \
+    export USE_REDIS=1 && \
+    export USE_DISTRIBUTED=1 && \
+    python setup.py install && \
+    conda install torchvision -c pytorch && \
     conda clean -ya && \
+    cd ../ && rm -rf pytorch && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.1.0-py36 "
 RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     source activate pytorch-py27 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y -c caffe2 lmdb python-lmdb && \
-    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
-    conda install -y pytorch==1.1.0 torchvision cudatoolkit=9.0 -c pytorch && \
+    conda install cudatoolkit=9.0 leveldb numpy ninja pyyaml mkl mkl-include setuptools cmake cffi typing scipy matplotlib pydot protobuf pandas nltk gensim && \
+    conda install -c caffe2 lmdb python-lmdb && \
+    conda install -c menpo opencv opencv3 && \
+    git clone https://github.com/pytorch/pytorch.git && \
+    cd pytorch && git checkout v1.1.0    && \
+    # if you are updating an existing checkout
+    git submodule sync && \
+    git submodule update --init --recursive && \
+    export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"} && \
+    export USE_CUDA=1 && \
+    export USE_CUDNN=1 && \
+    export USE_LMDB=1 && \
+    export USE_LEVELDB=1 && \
+    export USE_OPENCV=1 && \
+    export BUILD_CAFFE2_OPS=1 && \
+    export USE_FFMPEG=1 && \
+    export USE_FBGEMM=1 && \
+    export FULL_CAFFE2=1 && \
+    export BUILD_BINARY=1 && \
+    export USE_REDIS=1 && \
+    export USE_DISTRIBUTED=1 && \
+    python setup.py install && \
+    conda install torchvision -c pytorch && \
     conda clean -ya && \
+    cd ../ && rm -rf pytorch && \
     python -m ipykernel install --user --name pytorch-py27 --display-name PyTorch-v1.1.0-py27 "
 
 # Install mxnet 1.4.0
 RUN /bin/bash -c "conda create -n mxnet-py36 python=3.6 ipykernel && \
     source activate mxnet-py36 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir mxnet-cu90==1.4.0 && \
+    conda install-c menpo opencv opencv3 && \
+    conda installnumpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    pip install --no-cache-dir mxnet-cu90==1.4.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name mxnet-py36 --display-name MXNet-v1.4.0-py36 "
 RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
     source activate mxnet-py27 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir mxnet-cu90==1.4.0 && \
+    conda install-c menpo opencv opencv3 && \
+    conda installnumpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    pip install --no-cache-dir mxnet-cu90==1.4.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name mxnet-py27 --display-name MXNet-v1.4.0-py27 "
 
 # Install caffe 1.0.0
 RUN /bin/bash -c "conda create -n caffe-py36 python=3.6 ipykernel && \
     source activate caffe-py36 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y caffe-gpu==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install-c menpo opencv opencv3 && \
+    conda installcaffe-gpu==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     conda clean -ya && \
     python -m ipykernel install --user --name caffe-py36 --display-name Caffe-v1.0-py36 "
 RUN /bin/bash -c "conda create -n caffe-py27 python=2.7 ipykernel && \
     source activate caffe-py27 && \
-    conda install -y -c menpo opencv opencv3 && \
-    conda install -y caffe-gpu==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install-c menpo opencv opencv3 && \
+    conda installcaffe-gpu==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
     conda clean -ya && \
     python -m ipykernel install --user --name caffe-py27 --display-name Caffe-v1.0-py27 "
 
@@ -73,7 +113,7 @@ RUN /bin/bash -c "source deactivate" && \
     echo "c.NotebookApp.allow_remote_access = True" >> /root/.jupyter/jupyter_notebook && \
     # install jupyterLab extension
     conda install nodejs && \
-    conda install -y -c conda-forge ipywidgets jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
+    conda install-c conda-forge ipywidgets jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
     npm config set registry https://registry.npm.taobao.org && \
     conda clean -ya
 
@@ -82,8 +122,8 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
     jupyter labextension install @jupyterlab/plotly-extension && \
     jupyter labextension install @jupyterlab/toc && \
     # Integrate tensorboard
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --ignore-installed --upgrade pip wrapt && \
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir tensorflow jupyter-tensorboard && jupyter labextension install jupyterlab_tensorboard
+    pip install --no-cache-dir --ignore-installed --upgrade pip wrapt && \
+    pip install --no-cache-dir tensorflow jupyter-tensorboard && jupyter labextension install jupyterlab_tensorboard
 
 WORKDIR /notebooks
 

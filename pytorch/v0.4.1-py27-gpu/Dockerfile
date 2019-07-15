@@ -21,7 +21,7 @@ RUN mkdir -p /var/run/sshd && \
 # Install pytorch
 RUN conda install -y -c menpo opencv opencv3 && \
     conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
-    conda install pytorch=0.4.1 cuda90 -c pytorch && \
+    conda install pytorch=0.4.1 torchvision cuda90 -c pytorch && \
     conda clean -ya
 
 # Install Horovod
