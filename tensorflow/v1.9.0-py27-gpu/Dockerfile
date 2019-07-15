@@ -3,16 +3,16 @@ FROM cargo-infra.caicloud.xyz/devops_release/anaconda:v5.2.0-py27-gpu
 # http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
 
-## Create a wrapper for OpenMPI to allow running as root by default
-## ref https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile.mkl-horovod#L86
+# Create a wrapper for OpenMPI to allow running as root by default
+# ref https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile.mkl-horovod#L86
 RUN mv /usr/bin/mpirun /usr/bin/mpirun.real && \
     echo 'mpirun.real --allow-run-as-root "$@"' >> /usr/bin/mpirun && \
     chmod a+x /usr/bin/mpirun
 
-## Configure OpenMPI to run good defaults:
+# Configure OpenMPI to run good defaults:
 RUN echo "btl_tcp_if_exclude = lo,docker0" >> /etc/openmpi/openmpi-mca-params.conf
 
-## Allow OpenSSH to talk to containers without asking for confirmation
+# Allow OpenSSH to talk to containers without asking for confirmation
 RUN mkdir -p /var/run/sshd && \
     cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_config.new && \
     echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
@@ -21,10 +21,8 @@ RUN mkdir -p /var/run/sshd && \
 # Install tensorflow & keras
 ARG TENSORFLOW_VERSION=1.9.0
 ARG TENSORFLOW_TYPE=tensorflow-gpu
-RUN conda install -c menpo opencv opencv3 && \
-    conda install numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
-    conda clean -ya && \
-    pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
+# bug: conda-tensorflow has conflict with openmpi
+RUN pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 
 # Install Horovod
 # Pin GCC to 4.9 (priority 200) to compile correctly against TensorFlow, PyTorch, and MXNet.

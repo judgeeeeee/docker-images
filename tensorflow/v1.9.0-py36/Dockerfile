@@ -21,10 +21,8 @@ RUN mkdir -p /var/run/sshd && \
 # Install tensorflow & keras
 ARG TENSORFLOW_VERSION=1.9.0
 ARG TENSORFLOW_TYPE=tensorflow
-RUN conda install -c menpo opencv opencv3 && \
-    conda install numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
-    conda clean -ya && \
-    pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
+# bug: conda-tensorflow has conflict with openmpi
+RUN pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 
 # Install Horovod
 # Pin GCC to 4.9 (priority 200) to compile correctly against TensorFlow, PyTorch, and MXNet.

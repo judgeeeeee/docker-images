@@ -3,16 +3,16 @@ FROM cargo-infra.caicloud.xyz/devops_release/anaconda:v5.2.0-py36
 # Install tensorflow-1.12.0 and keras-2.2.2
 RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \
     source activate tf-py36 && \
-    conda install -c menpo opencv opencv3 && \
-    conda install numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install -c menpo opencv3 && \
     pip install --no-cache-dir tensorflow==1.12.0 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py36 --display-name TensorFlow-v1.12-py36 "
 
 RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
     source activate tf-py27 && \
-    conda install -c menpo opencv opencv3 && \
-    conda install numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install -c menpo opencv3 && \
     pip install --no-cache-dir tensorflow==1.12.0 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py27 --display-name TensorFlow-v1.12-py27 "
@@ -20,9 +20,9 @@ RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
 # Install pytorch-1.1.0
 RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     source activate pytorch-py36 && \
-    conda install leveldb numpy ninja pyyaml mkl mkl-include setuptools cmake cffi typing scipy matplotlib pydot protobuf pandas nltk gensim && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
-    conda install -c menpo opencv opencv3 && \
+    conda install -c menpo opencv3 && \
     git clone https://github.com/pytorch/pytorch.git && \
     cd pytorch && git checkout v1.1.0    && \
     # if you are updating an existing checkout
@@ -48,9 +48,9 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.1.0-py36 "
 RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     source activate pytorch-py27 && \
-    conda install leveldb numpy ninja pyyaml mkl mkl-include setuptools cmake cffi typing scipy matplotlib pydot protobuf pandas nltk gensim && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
-    conda install -c menpo opencv opencv3 && \
+    conda install -c menpo opencv3 && \
     git clone https://github.com/pytorch/pytorch.git && \
     cd pytorch && git checkout v1.1.0    && \
     # if you are updating an existing checkout
@@ -78,15 +78,15 @@ RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
 # Install mxnet 1.4.0
 RUN /bin/bash -c "conda create -n mxnet-py36 python=3.6 ipykernel && \
     source activate mxnet-py36 && \
-    conda install -c menpo opencv opencv3 && \
-    conda install numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install -c menpo opencv3 && \
     pip install --no-cache-dir mxnet==1.4.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name mxnet-py36 --display-name MXNet-v1.4.0-py36 "
 RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
     source activate mxnet-py27 && \
-    conda install -c menpo opencv opencv3 && \
-    conda install numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install -c menpo opencv3 && \
     pip install --no-cache-dir mxnet==1.4.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name mxnet-py27 --display-name MXNet-v1.4.0-py27 "
@@ -94,14 +94,16 @@ RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
 # Install caffe 1.0.0
 RUN /bin/bash -c "conda create -n caffe-py36 python=3.6 ipykernel && \
     source activate caffe-py36 && \
-    conda install -c menpo opencv opencv3 && \
-    conda install caffe==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install -c menpo opencv3 && \
+    conda install caffe==1.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name caffe-py36 --display-name Caffe-v1.0-py36 "
 RUN /bin/bash -c "conda create -n caffe-py27 python=2.7 ipykernel && \
     source activate caffe-py27 && \
-    conda install -c menpo opencv opencv3 && \
-    conda install caffe==1.0 numpy scipy matplotlib pydot pytest protobuf pandas nltk gensim scikit-learn mkl && \
+    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install -c menpo opencv3 && \
+    conda install caffe==1.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name caffe-py27 --display-name Caffe-v1.0-py27 "
 
