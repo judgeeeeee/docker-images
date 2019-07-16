@@ -13,7 +13,7 @@ function valid () {
 
 
 #for package in anaconda caffe;do
-for package in anaconda tensorflow;do
+for package in anaconda tensorflow jupyter pytorch;do
     for version in  `ls $package`; do
     	echo "Start build -------> $package/$version"
 	docker build -t codeflitting/$package:$version $package/$version/ 

@@ -33,18 +33,21 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     export USE_CUDNN=0 && \
     export USE_LMDB=1 && \
     export USE_LEVELDB=1 && \
-    export USE_OPENCV=1 && \
+    export USE_OPENMP=1 && \
     export BUILD_CAFFE2_OPS=1 && \
     export USE_FFMPEG=1 && \
     export USE_FBGEMM=1 && \
-    export FULL_CAFFE2=1 && \
     export BUILD_BINARY=1 && \
     export USE_REDIS=1 && \
     export USE_DISTRIBUTED=1 && \
     python setup.py install && \
-    conda install torchvision-cpu -c pytorch && \
     conda clean -ya && \
     cd ../ && rm -rf pytorch && \
+    # Install torchversion
+    git clone https://github.com/pytorch/vision.git && \
+    cd vision && git checkout v0.3.0 && \
+    FORCE_CUDA=0 python setup.py install && \
+    cd ../ && rm -rf vision && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.1.0-py36 "
 RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     source activate pytorch-py27 && \
@@ -61,18 +64,21 @@ RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     export USE_CUDNN=0 && \
     export USE_LMDB=1 && \
     export USE_LEVELDB=1 && \
-    export USE_OPENCV=1 && \
+    export USE_OPENMP=1 && \
     export BUILD_CAFFE2_OPS=1 && \
     export USE_FFMPEG=1 && \
     export USE_FBGEMM=1 && \
-    export FULL_CAFFE2=1 && \
     export BUILD_BINARY=1 && \
     export USE_REDIS=1 && \
     export USE_DISTRIBUTED=1 && \
     python setup.py install && \
-    conda install torchvision-cpu -c pytorch && \
     conda clean -ya && \
     cd ../ && rm -rf pytorch && \
+    # Install torchversion
+    git clone https://github.com/pytorch/vision.git && \
+    cd vision && git checkout v0.3.0 && \
+    FORCE_CUDA=0 python setup.py install && \
+    cd ../ && rm -rf vision && \
     python -m ipykernel install --user --name pytorch-py27 --display-name PyTorch-v1.1.0-py27 "
 
 # Install mxnet 1.4.0
@@ -80,15 +86,15 @@ RUN /bin/bash -c "conda create -n mxnet-py36 python=3.6 ipykernel && \
     source activate mxnet-py36 && \
     conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
-    pip install --no-cache-dir mxnet==1.4.0 && \
     conda clean -ya && \
+    pip install --no-cache-dir mxnet==1.4.0 && \
     python -m ipykernel install --user --name mxnet-py36 --display-name MXNet-v1.4.0-py36 "
 RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
     source activate mxnet-py27 && \
     conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
-    pip install --no-cache-dir mxnet==1.4.0 && \
     conda clean -ya && \
+    pip install --no-cache-dir mxnet==1.4.0 && \
     python -m ipykernel install --user --name mxnet-py27 --display-name MXNet-v1.4.0-py27 "
 
 # Install caffe 1.0.0
