@@ -19,10 +19,9 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-RUN conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
-    conda install pytorch-cpu=0.4.1 torchvision-cpu -c pytorch && \
+RUN conda install pytorch-cpu=0.4.1 torchvision-cpu -c pytorch && \
     conda clean -ya
-#
+
 # Install Horovod
 ## Pin GCC to 4.9 (priority 200) to compile correctly against TensorFlow, PyTorch, and MXNet.
 ## Backup existing GCC installation as priority 100, so that it can be recovered later.
@@ -35,7 +34,7 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 200 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 200 && \
     update-alternatives --install /usr/bin/x86_64-linux-gnu-g++ x86_64-linux-gnu-g++ /usr/bin/g++-4.9 200
 
-## Install horovod with tensorflow
+## Install horovod
 ARG HOROVOD_VERSION=0.16.1
 RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
 

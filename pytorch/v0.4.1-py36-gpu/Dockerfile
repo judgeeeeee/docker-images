@@ -19,8 +19,7 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-RUN conda install -y numpy scipy matplotlib pydot protobuf pandas nltk gensim scikit-learn mkl && \
-    conda install pytorch=0.4.1 torchvision cuda90 -c pytorch && \
+RUN conda install pytorch=0.4.1 torchvision cuda90 -c pytorch && \
     conda clean -ya
 
 # Install Horovod
@@ -37,7 +36,11 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 200 && \
 
 ## Install horovod with tensorflow
 ARG HOROVOD_VERSION=0.16.1
-RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
+# RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
+
+RUN ldconfig /usr/local/cuda-9.0/targets/x86_64-linux/lib/stubs && \
+    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} && \
+    ldconfig
 
 ## Remove GCC pinning
 RUN update-alternatives --remove gcc /usr/bin/gcc-4.9 && \
