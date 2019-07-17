@@ -20,7 +20,7 @@ RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
 # Install pytorch-1.1.0
 RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     source activate pytorch-py36 && \
-    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install future cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
     git clone https://github.com/pytorch/pytorch.git && \

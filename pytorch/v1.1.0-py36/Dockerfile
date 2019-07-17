@@ -19,7 +19,7 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-RUN conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+RUN conda install future cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
     git clone https://github.com/pytorch/pytorch.git && \
