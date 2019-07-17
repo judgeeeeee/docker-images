@@ -23,6 +23,7 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
+    conda install -c pytorch magma-cuda90 && \
     git clone https://github.com/pytorch/pytorch.git && \
     cd pytorch && git checkout v1.1.0    && \
     # if you are updating an existing checkout
@@ -51,9 +52,10 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.1.0-py36 "
 RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     source activate pytorch-py27 && \
-    conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install future cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
+    conda install -c pytorch magma-cuda90 && \
     git clone https://github.com/pytorch/pytorch.git && \
     cd pytorch && git checkout v1.1.0    && \
     # if you are updating an existing checkout
@@ -121,7 +123,8 @@ RUN /bin/bash -c "source deactivate" && \
     echo "c.NotebookApp.allow_remote_access = True" >> /root/.jupyter/jupyter_notebook && \
     # install jupyterLab extension
     conda install nodejs && \
-    conda install ipywidgets jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
+    conda update jupyter jupyterlab -c conda-forge && \
+    conda install ipywidgets jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
     npm config set registry https://registry.npm.taobao.org && \
     conda clean -ya
 
