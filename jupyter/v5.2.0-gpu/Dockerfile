@@ -124,7 +124,7 @@ RUN /bin/bash -c "source deactivate" && \
     # install jupyterLab extension
     conda install nodejs && \
     conda update jupyter jupyterlab -c conda-forge && \
-    conda install ipywidgets jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
+    conda install -c conda-forge ipywidgets jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
     npm config set registry https://registry.npm.taobao.org && \
     conda clean -ya
 

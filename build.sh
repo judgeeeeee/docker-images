@@ -18,6 +18,7 @@ for package in anaconda tensorflow jupyter pytorch;do
     	echo "Start build -------> $package/$version"
 	docker build -t codeflitting/$package:$version $package/$version/ 
 	valid $package:$version
+        docker push codeflitting/$package:$version
 	docker tag codeflitting/$package:$version cargo-infra.caicloud.xyz/devops_release/$package:$version
     done
 done
