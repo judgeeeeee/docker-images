@@ -48,18 +48,6 @@ RUN conda install future cffi cmake flask gensim graphviz hypothesis jupyter jup
     FORCE_CUDA=1 python setup.py install && \
     cd ../ && rm -rf vision
 
-# Install Horovod
-## Pin GCC to 4.9 (priority 200) to compile correctly against TensorFlow, PyTorch, and MXNet.
-## Backup existing GCC installation as priority 100, so that it can be recovered later.
-RUN update-alternatives --install /usr/bin/gcc gcc $(readlink -f $(which gcc)) 100 && \
-    update-alternatives --install /usr/bin/x86_64-linux-gnu-gcc x86_64-linux-gnu-gcc $(readlink -f $(which gcc)) 100 && \
-    update-alternatives --install /usr/bin/g++ g++ $(readlink -f $(which g++)) 100 && \
-    update-alternatives --install /usr/bin/x86_64-linux-gnu-g++ x86_64-linux-gnu-g++ $(readlink -f $(which g++)) 100
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 200 && \
-    update-alternatives --install /usr/bin/x86_64-linux-gnu-gcc x86_64-linux-gnu-gcc /usr/bin/gcc-4.9 200 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 200 && \
-    update-alternatives --install /usr/bin/x86_64-linux-gnu-g++ x86_64-linux-gnu-g++ /usr/bin/g++-4.9 200
-
 ## Install horovod with tensorflow
 ARG HOROVOD_VERSION=0.16.1
 # RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
@@ -67,9 +55,3 @@ ARG HOROVOD_VERSION=0.16.1
 RUN ldconfig /usr/local/cuda-9.0/targets/x86_64-linux/lib/stubs && \
     HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} && \
     ldconfig
-
-## Remove GCC pinning
-RUN update-alternatives --remove gcc /usr/bin/gcc-4.9 && \
-    update-alternatives --remove x86_64-linux-gnu-gcc /usr/bin/gcc-4.9 && \
-    update-alternatives --remove g++ /usr/bin/g++-4.9 && \
-    update-alternatives --remove x86_64-linux-gnu-g++ /usr/bin/g++-4.9
