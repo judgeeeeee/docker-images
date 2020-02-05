@@ -38,14 +38,14 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-RUN curl -o ~/miniconda3.sh -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    chmod +x ~/miniconda3.sh && \
-    ~/miniconda3.sh -b -p /opt/conda && \
-    rm ~/miniconda3.sh && \
+# https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+RUN curl -o ~/miniconda2.sh -O https://repo.continuum.io/miniconda/Miniconda2-4.7.12.1-Linux-x86_64.sh && \
+    chmod +x ~/miniconda2.sh && \
+    ~/miniconda2.sh -b -p /opt/conda && \
+    rm ~/miniconda2.sh && \
     /opt/conda/bin/conda config --set show_channel_urls yes && \
-    /opt/conda/bin/conda install python=3.6 conda-build && \
-    /opt/conda/bin/conda install cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    /opt/conda/bin/conda install python=2.7 conda-build && \
+    /opt/conda/bin/conda install tqdm absl-py cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     /opt/conda/bin/conda install opencv3 -c menpo && \
     /opt/conda/bin/conda clean -ya
 
