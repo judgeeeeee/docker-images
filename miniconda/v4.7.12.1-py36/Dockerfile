@@ -33,7 +33,7 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     openssh-server \
     protobuf-compiler \
     # For horovod
-    gcc-4.9 g++-4.9 gcc-4.9-base \
+    g++-4.8 \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -45,7 +45,7 @@ RUN curl -o ~/miniconda3.sh -O https://repo.continuum.io/miniconda/Miniconda3-4.
     rm ~/miniconda3.sh && \
     /opt/conda/bin/conda config --set show_channel_urls yes && \
     /opt/conda/bin/conda install python=3.6 conda-build && \
-    /opt/conda/bin/conda install tqdm absl-py cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    /opt/conda/bin/conda install gxx_linux-64 tqdm absl-py cffi cmake flask gensim graphviz hypothesis jupyter jupyterlab leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     /opt/conda/bin/conda install opencv3 -c menpo && \
     /opt/conda/bin/conda clean -ya
 
