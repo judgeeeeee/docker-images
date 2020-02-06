@@ -1,4 +1,4 @@
-FROM cargo-infra.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36
+FROM cargo.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36
 
 # http://bugs.python.org/issue19846
 ENV LANG C.UTF-8

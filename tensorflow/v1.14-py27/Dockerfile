@@ -1,4 +1,4 @@
-FROM cargo-infra.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36
+FROM cargo.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py27
 
 # http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
@@ -19,7 +19,7 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install tensorflow & keras
-ARG TENSORFLOW_VERSION=1.13
+ARG TENSORFLOW_VERSION=1.14
 ARG TENSORFLOW_TYPE=tensorflow
 RUN pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 # bug: conda-tensorflow has conflict with openmpi
