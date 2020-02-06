@@ -1,4 +1,4 @@
-FROM cargo-infra.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36
+FROM cargo.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36
 
 # http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
@@ -19,7 +19,7 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-RUN conda install pytorch==1.3.1 torchvision==0.4.0 cpuonly -c pytorch
+RUN conda install pytorch==1.3.1 torchvision cpuonly -c pytorch
 
 ## Install horovod with pytorch
 ARG HOROVOD_VERSION=0.16.4
