@@ -1,4 +1,4 @@
-FROM cargo-infra.caicloud.xyz/devops_release/anaconda:v5.2.0-py36
+FROM cargo.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36
 
 # Install caffe
 RUN conda install caffe==1.0 && \

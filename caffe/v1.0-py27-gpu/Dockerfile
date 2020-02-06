@@ -1,4 +1,4 @@
-FROM cargo-infra.caicloud.xyz/devops_release/anaconda:v5.2.0-py27-gpu
+FROM cargo.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py27-gpu
 
 # Install caffe-gpu
 # see https://github.com/conda/conda/issues/8197
