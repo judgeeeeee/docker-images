@@ -74,10 +74,9 @@ RUN /bin/bash -c "source deactivate" && \
     echo "c.NotebookApp.token = ''" >> /root/.jupyter/jupyter_notebook_config.py && \
     echo "c.NotebookApp.allow_remote_access = True" >> /root/.jupyter/jupyter_notebook && \
     # install jupyterLab extension
-    conda install nodejs && \
-    conda update jupyter jupyterlab -c conda-forge && \
+    conda install nodejs jupyter jupyterlab -c conda-forge && \
     conda install -c conda-forge ipywidgets jupyter_contrib_nbextensions jupyter_nbextensions_configurator && \
-    npm config set registry https://registry.npm.taobao.org && \
+    # npm config set registry https://registry.npm.taobao.org && \
     conda clean -ya
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
