@@ -85,7 +85,11 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
     jupyter labextension install @jupyterlab/toc && \
     # Integrate tensorboard
     pip install --no-cache-dir --ignore-installed --upgrade pip wrapt && \
-    pip install --no-cache-dir tensorflow jupyter-tensorboard && jupyter labextension install jupyterlab_tensorboard
+    pip install --no-cache-dir tensorflow jupyter-tensorboard && jupyter labextension install jupyterlab_tensorboard && \
+    # Integrate git
+    pip install --upgrade --no-cache-dir jupyterlab-git  && jupyter lab build && \
+    # Integrate nvdashboard
+    pip install --upgrade --no-cache-dir jupyterlab-nvdashboard && jupyter labextension install jupyterlab-nvdashboard
 
 WORKDIR /notebooks
 
