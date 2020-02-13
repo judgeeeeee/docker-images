@@ -11,7 +11,7 @@ function valid () {
 
 #for package in anaconda caffe;do
 #for package in anaconda tensorflow jupyter pytorch mxnet caffe scikit-learn;do
-for package in miniconda tensorflow keras pytorch mxnet caffe scikit-learn jupyterlab;do
+for package in miniconda tensorflow keras pytorch mxnet caffe scikit-learn jupyterlab jupyterlab-base;do
     for version in  `ls $package`; do
     	echo "Start build -------> $package/$version"
 	docker build -t codeflitting/$package:$version $package/$version/ 
