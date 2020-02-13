@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 
 RUN apt-get update  && apt-get install -y --no-install-recommends \
     build-essential \
@@ -45,7 +45,7 @@ RUN curl -o ~/miniconda2.sh -O https://repo.continuum.io/miniconda/Miniconda2-4.
     rm ~/miniconda2.sh && \
     /opt/conda/bin/conda config --set show_channel_urls yes && \
     /opt/conda/bin/conda install python=2.7 conda-build && \
-    /opt/conda/bin/conda install gxx_linux-64 tqdm absl-py cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    /opt/conda/bin/conda install pillow<7 gxx_linux-64 tqdm absl-py cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     /opt/conda/bin/conda install opencv3 -c menpo && \
     /opt/conda/bin/conda clean -ya
 

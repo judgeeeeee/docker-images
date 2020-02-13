@@ -23,7 +23,7 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     conda install tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
-    conda install pytorch==1.3.1 torchvision cudatoolkit=10.1 -c pytorch && \
+    conda install pytorch==1.3.1 torchvision cudatoolkit=10.0 -c pytorch && \
     conda clean -ya && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.3-py36 "
 RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
@@ -31,7 +31,7 @@ RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     conda install tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
-    conda install pytorch==1.3.1 torchvision cudatoolkit=10.1 -c pytorch && \
+    conda install pytorch==1.3.1 torchvision cudatoolkit=10.0 -c pytorch && \
     conda clean -ya && \
     python -m ipykernel install --user --name pytorch-py27 --display-name PyTorch-v1.3-py27 "
 
@@ -41,14 +41,14 @@ RUN /bin/bash -c "conda create -n mxnet-py36 python=3.6 ipykernel && \
     conda install tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     conda clean -ya && \
-    pip install --no-cache-dir mxnet-cu101==1.5.1 && \
+    pip install --no-cache-dir mxnet-cu100==1.5.1 && \
     python -m ipykernel install --user --name mxnet-py36 --display-name MXNet-v1.5-py36 "
 RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
     source activate mxnet-py27 && \
     conda install tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     conda clean -ya && \
-    pip install --no-cache-dir mxnet-cu101==1.5.1 && \
+    pip install --no-cache-dir mxnet-cu100==1.5.1 && \
     python -m ipykernel install --user --name mxnet-py27 --display-name MXNet-v1.5-py27 "
 
 # Install caffe 1.0

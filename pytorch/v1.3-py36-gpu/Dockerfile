@@ -19,12 +19,12 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-RUN conda install pytorch=1.3.1 torchvision cudatoolkit=10.1 -c pytorch
+RUN conda install pytorch=1.3.1 torchvision cudatoolkit=10.0 -c pytorch
 
 ## Install horovod with pytorch
 ARG HOROVOD_VERSION=0.16.4
 # RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
 
-RUN ldconfig /usr/local/cuda-10.1/targets/x86_64-linux/lib/stubs && \
+RUN ldconfig /usr/local/cuda-10.0/targets/x86_64-linux/lib/stubs && \
     HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} && \
     ldconfig
