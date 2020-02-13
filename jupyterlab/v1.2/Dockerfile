@@ -3,7 +3,7 @@ FROM cargo.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36
 # Install tensorflow-1.14 and keras
 RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \
     source activate tf-py36 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     pip install --no-cache-dir tensorflow==1.14 keras tflearn && \
     conda clean -ya && \
@@ -11,7 +11,7 @@ RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \
 
 RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
     source activate tf-py27 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     pip install --no-cache-dir tensorflow==1.14 keras tflearn && \
     conda clean -ya && \
@@ -20,7 +20,7 @@ RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
 # Install pytorch-1.3.1
 RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     source activate pytorch-py36 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
     conda install pytorch==1.3.1 torchvision cpuonly -c pytorch && \
@@ -28,7 +28,7 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.3-py36 "
 RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     source activate pytorch-py27 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c caffe2 lmdb python-lmdb && \
     conda install -c menpo opencv3 && \
     conda install pytorch==1.3.1 torchvision cpuonly -c pytorch && \
@@ -38,14 +38,14 @@ RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
 # Install mxnet 1.5
 RUN /bin/bash -c "conda create -n mxnet-py36 python=3.6 ipykernel && \
     source activate mxnet-py36 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     conda clean -ya && \
     pip install --no-cache-dir mxnet==1.5.1 && \
     python -m ipykernel install --user --name mxnet-py36 --display-name MXNet-v1.5-py36 "
 RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
     source activate mxnet-py27 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     conda clean -ya && \
     pip install --no-cache-dir mxnet==1.5.1 && \
@@ -54,14 +54,14 @@ RUN /bin/bash -c "conda create -n mxnet-py27 python=2.7 ipykernel && \
 # Install caffe 1.0
 RUN /bin/bash -c "conda create -n caffe-py36 python=3.6 ipykernel && \
     source activate caffe-py36 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     conda install caffe==1.0 && \
     conda clean -ya && \
     python -m ipykernel install --user --name caffe-py36 --display-name Caffe-v1.0-py36 "
 RUN /bin/bash -c "conda create -n caffe-py27 python=2.7 ipykernel && \
     source activate caffe-py27 && \
-    conda install pillow=6.2.2 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
+    conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
     conda install caffe==1.0 && \
     conda clean -ya && \
