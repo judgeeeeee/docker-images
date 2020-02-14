@@ -19,8 +19,8 @@ RUN mkdir -p /var/run/sshd && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Install pytorch
-RUN conda install pytorch==1.3.1 torchvision cpuonly transformers=2.3.0 python-levenshtein -c pytorch && conda clean -ya
+RUN conda install pytorch==1.3.1 torchvision cpuonly -c pytorch && conda clean -ya
 
 ## Install horovod with pytorch
 ARG HOROVOD_VERSION=0.16.4
-RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
+RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} transformers==2.3.0 python-levenshtein

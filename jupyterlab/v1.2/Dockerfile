@@ -25,6 +25,7 @@ RUN /bin/bash -c "conda create -n pytorch-py36 python=3.6 ipykernel && \
     conda install -c menpo opencv3 && \
     conda install pytorch==1.3.1 torchvision cpuonly -c pytorch && \
     conda clean -ya && \
+    pip install --no-cache-dir transformers==2.3.0 python-levenshtein && \
     python -m ipykernel install --user --name pytorch-py36 --display-name PyTorch-v1.3-py36 "
 RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     source activate pytorch-py27 && \
@@ -33,6 +34,7 @@ RUN /bin/bash -c "conda create -n pytorch-py27 python=2.7 ipykernel && \
     conda install -c menpo opencv3 && \
     conda install pytorch==1.3.1 torchvision cpuonly -c pytorch && \
     conda clean -ya && \
+    pip install --no-cache-dir transformers==2.3.0 python-levenshtein && \
     python -m ipykernel install --user --name pytorch-py27 --display-name PyTorch-v1.3-py27 "
 
 # Install mxnet 1.5
