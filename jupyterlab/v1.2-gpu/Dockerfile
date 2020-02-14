@@ -5,6 +5,7 @@ RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \
     source activate tf-py36 && \
     conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
+    conda install cudatoolkit=10.0 cudnn && \
     pip install --no-cache-dir tensorflow-gpu==1.14 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py36 --display-name TensorFlow-v1.14-py36 "
@@ -13,6 +14,7 @@ RUN /bin/bash -c "conda create -n tf-py27 python=2.7 ipykernel && \
     source activate tf-py27 && \
     conda install pillow=6.2.1 tqdm absl-py future cffi cmake flask gensim graphviz hypothesis leveldb matplotlib mkl mkl-include ninja nltk numpy pandas protobuf pydot pyyaml requests scikit-image scikit-learn scipy setuptools tornado typing && \
     conda install -c menpo opencv3 && \
+    conda install cudatoolkit=10.0 cudnn && \
     pip install --no-cache-dir tensorflow-gpu==1.14 keras tflearn && \
     conda clean -ya && \
     python -m ipykernel install --user --name tf-py27 --display-name TensorFlow-v1.14-py27 "
