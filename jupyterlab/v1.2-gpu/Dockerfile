@@ -1,4 +1,4 @@
-FROM cargo.caicloud.xyz/devops_release/miniconda:v4.7.12.1-py36-gpu
+FROM cargo.caicloud.xyz/devops_release/jupyterlab-base:v1.2-gpu
 
 # Install tensorflow-1.14 and keras
 RUN /bin/bash -c "conda create -n tf-py36 python=3.6 ipykernel && \

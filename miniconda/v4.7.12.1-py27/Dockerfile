@@ -33,7 +33,7 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     openssh-server \
     protobuf-compiler \
     # For horovod
-    g++-4.8 \
+    g++-4.9 \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
