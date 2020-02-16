@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 function valid () {
     if [ $? -eq 0 ]; then
@@ -11,7 +12,7 @@ function valid () {
 
 #for package in anaconda caffe;do
 #for package in anaconda tensorflow jupyter pytorch mxnet caffe scikit-learn;do
-for package in miniconda tensorflow keras pytorch mxnet caffe scikit-learn jupyterlab jupyterlab-base;do
+for package in miniconda tensorflow keras pytorch mxnet caffe scikit-learn jupyterlab-base jupyterlab;do
     for version in  `ls $package`; do
     	echo "Start build -------> $package/$version"
 	docker build -t codeflitting/$package:$version $package/$version/ 
