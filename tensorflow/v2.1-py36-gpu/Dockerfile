@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 RUN conda install cudatoolkit=10.0 cudnn &&  conda clean -ya
 
 ## Install horovod with pytorch
-ARG HOROVOD_VERSION=0.16.4
+ARG HOROVOD_VERSION=0.18.2
 # RUN HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
 
 RUN ldconfig /usr/local/cuda-10.0/targets/x86_64-linux/lib/stubs && \
