@@ -26,6 +26,8 @@ RUN pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 # RUN conda install keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION} && \
 #    conda clean -ya
 
+#RUN apt-get update  && apt-get install -y --no-install-recommends g++-7 && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Install horovod with tensorflow
-ARG HOROVOD_VERSION=0.18.2
-RUN HOROVOD_WITH_TENSORFLOW=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
+#ARG HOROVOD_VERSION=0.19.0
+#RUN HOROVOD_WITH_TENSORFLOW=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION}
