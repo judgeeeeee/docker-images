@@ -6,7 +6,8 @@ ARG MXNET_TYPE=mxnet-cu100
 RUN pip install --no-cache-dir ${MXNET_TYPE}==${MXNET_VERSION}
 
 ## Install horovod with mxnet
-ARG HOROVOD_VERSION=0.18.2
-RUN ldconfig /usr/local/cuda-10.0/targets/x86_64-linux/lib/stubs && \
-    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_MXNET=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} && \
+ARG HOROVOD_VERSION=0.19.0
+RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
+    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_GPU_BROADCAST=NCCL HOROVOD_WITH_MXNET=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} && \
     ldconfig
+
