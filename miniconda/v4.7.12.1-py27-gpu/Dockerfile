@@ -17,7 +17,6 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
     libleveldb-dev \
     liblmdb-dev \
     libopencv-dev \
-    libopenmpi-dev \
     libpng-dev \
     libprotobuf-dev \
     libsnappy-dev \
