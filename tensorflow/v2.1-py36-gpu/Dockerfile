@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir keras ${TENSORFLOW_TYPE}==${TENSORFLOW_VERSION}
 #    conda clean -ya
 
 # Install horovod with tensorflow
-ARG HOROVOD_VERSION=0.19.0
-RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
-    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_GPU_BROADCAST=NCCL HOROVOD_WITH_TENSORFLOW=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} && \
-    ldconfig
+#ARG HOROVOD_VERSION=0.19.0
+#RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
+#    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_GPU_BROADCAST=NCCL HOROVOD_WITH_TENSORFLOW=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} && \
+#    ldconfig
