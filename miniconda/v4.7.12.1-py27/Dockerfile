@@ -39,8 +39,8 @@ RUN apt-get update  && apt-get install -y --no-install-recommends \
 RUN mkdir /tmp/openmpi && \
     cd /tmp/openmpi && \
     wget https://www.open-mpi.org/software/ompi/v4.0/downloads/openmpi-4.0.2.tar.gz && \
-    tar zxf openmpi-4.0.0.tar.gz && \
-    cd openmpi-4.0.0 && \
+    tar zxf openmpi-4.0.2.tar.gz && \
+    cd openmpi-4.0.2 && \
     ./configure --enable-orterun-prefix-by-default && \
     make -j $(nproc) all && \
     make install && \
