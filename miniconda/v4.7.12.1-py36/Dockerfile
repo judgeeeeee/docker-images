@@ -49,12 +49,12 @@ RUN mkdir /tmp/openmpi && \
 
 # Create a wrapper for OpenMPI to allow running as root by default
 # ref https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile.mkl-horovod#L86
-RUN mv /usr/bin/mpirun /usr/bin/mpirun.real && \
-    echo 'mpirun.real --allow-run-as-root "$@"' >> /usr/bin/mpirun && \
-    chmod a+x /usr/bin/mpirun
+RUN mv /usr/local/bin/mpirun /usr/local/bin/mpirun.real && \
+    echo 'mpirun.real --allow-run-as-root "$@"' >> /usr/local/bin/mpirun && \
+    chmod a+x /usr/local/bin/mpirun
 
 # Configure OpenMPI to run good defaults:
-RUN echo "btl_tcp_if_exclude = lo,docker0" >> /etc/openmpi/openmpi-mca-params.conf
+RUN echo "btl_tcp_if_exclude = lo,docker0" >> /usr/local/etc/openmpi-mca-params.conf
 
 # Allow OpenSSH to talk to containers without asking for confirmation
 RUN mkdir -p /var/run/sshd && \
