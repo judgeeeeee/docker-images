@@ -32,5 +32,5 @@ RUN conda install -c caffe2 lmdb python-lmdb && \
 ## Install horovod with pytorch
 ARG HOROVOD_VERSION=0.19.0
 RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
-    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_GPU_BROADCAST=NCCL HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} transformers==2.3.0 python-levenshtein && \
+    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_GPU_BROADCAST=NCCL HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod==${HOROVOD_VERSION} transformers==2.5.1 python-levenshtein && \
     ldconfig
